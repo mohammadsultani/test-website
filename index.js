@@ -36,6 +36,21 @@ window.onload = function () {
 };
 window.addEventListener("resize", updatedMenuFontSize);
 
+// *********************************************            Main Menu Code      ******************************************************************
+const selectMenu = (num) => {
+  if (num == 1) {
+    menuSection.classList.add("d-none"); // hiding menu section
+    numbersLesson.classList.remove("d-none");
+    numbersLesson.classList.add("d-block"); // Showing numbers lesson
+    speech.text = 0;
+    return window.speechSynthesis.speak(speech);
+  } else if (num == 2) {
+    menuSection.classList.add("d-none"); // hiding menu section
+    numbersQuizSection.classList.remove("d-none");
+    return numbersQuizSection.classList.add("d-block"); // Showing numbers lesson
+  }
+};
+
 // *********************************************            Numbers Lesson Code      ******************************************************************
 leftButton.addEventListener("click", () => {
   disableButton();
@@ -60,20 +75,6 @@ const disableButton = () => {
     rightButton.disabled = false;
     leftButton.disabled = false;
   }, 800);
-};
-
-const selectMenu = (num) => {
-  if (num == 1) {
-    menuSection.classList.add("d-none"); // hiding menu section
-    numbersLesson.classList.remove("d-none");
-    numbersLesson.classList.add("d-block"); // Showing numbers lesson
-    speech.text = 0;
-    return window.speechSynthesis.speak(speech);
-  } else if (num == 2) {
-    menuSection.classList.add("d-none"); // hiding menu section
-    numbersQuizSection.classList.remove("d-none");
-    return numbersQuizSection.classList.add("d-block"); // Showing numbers lesson
-  }
 };
 
 // *********************************************             Numbers Quiz Code      ******************************************************************
@@ -121,10 +122,12 @@ const generateRandomNumberOptions = () => {
     numbersOptions[i].innerHTML = e;
   });
 };
-
+//  Back to menu button
 const back = () => {
   numbersLesson.classList.remove("d-block");
   numbersLesson.classList.add("d-none");
+  numbersQuizSection.classList.remove("d-block");
+  numbersQuizSection.classList.add("d-none");
   menuSection.classList.remove("d-none");
   return menuSection.classList.add("d-flex");
 };
