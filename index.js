@@ -81,6 +81,7 @@ const disableButton = () => {
 
 const selectRandomNum = () => {
   selectRandomNumBtn.style.pointerEvents = "none";
+  selectRandomNumBtn.style.opacity = "0.3";
   for (let index = 0; index < numbersOptions.length; index++) {
     numbersOptions[index].classList.remove("bg-danger");
     numbersOptions[index].classList.remove("bg-info");
@@ -90,7 +91,8 @@ const selectRandomNum = () => {
   window.speechSynthesis.speak(speech);
   generateRandomNumberOptions();
   return setTimeout(() => {
-    selectRandomNumBtn.style.pointerEvents = "auto";
+    selectRandomNumBtn.style.opacity = "1";
+    return (selectRandomNumBtn.style.pointerEvents = "auto");
   }, 1000);
 };
 const selectOption = (option) => {
