@@ -2,6 +2,8 @@
 const menu = document.getElementsByClassName("header");
 const menuSection = document.getElementById("menu");
 const numbersQuizSection = document.getElementById("numbersQuizSection");
+const englishLessonsSection = document.getElementById("englishLessonsSection");
+const englishQuizSection = document.getElementById("englishQuizSection");
 // Numbers lesson / page
 const leftButton = document.getElementById("left");
 const rightButton = document.getElementById("right");
@@ -48,6 +50,14 @@ const selectMenu = (num) => {
     menuSection.classList.add("d-none"); // hiding menu section
     numbersQuizSection.classList.remove("d-none");
     return numbersQuizSection.classList.add("d-block"); // Showing numbers lesson
+  } else if (num == 3) {
+    menuSection.classList.add("d-none"); // hiding menu section
+    englishLessonsSection.classList.remove("d-none");
+    return englishLessonsSection.classList.add("d-block"); // Showing english lesson
+  } else {
+    menuSection.classList.add("d-none"); // hiding menu section
+    englishQuizSection.classList.remove("d-none");
+    return englishQuizSection.classList.add("d-block"); // Showing english lesson
   }
 };
 
@@ -130,6 +140,10 @@ const back = () => {
   numbersLesson.classList.add("d-none");
   numbersQuizSection.classList.remove("d-block");
   numbersQuizSection.classList.add("d-none");
+  englishLessonsSection.classList.remove("d-block");
+  englishLessonsSection.classList.add("d-none");
+  englishQuizSection.classList.remove("d-block");
+  englishQuizSection.classList.add("d-none");
   menuSection.classList.remove("d-none");
   return menuSection.classList.add("d-flex");
 };
