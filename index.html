@@ -20,11 +20,12 @@
 
   <body>
     <div class="">
-      <!-- Menu -->
+      <!-- **************************      Main Menu Section        ******************************************************* -->
+
       <div
         id="menu"
         class="
-          d-none
+          d-flex
           vh-100
           flex-column
           justify-content-center
@@ -64,7 +65,8 @@
         </ul>
       </div>
 
-      <!-- Numbers Lesson -->
+      <!-- **************************         Numbers Lessons        ******************************************************* -->
+
       <div id="numbersLesson" class="d-none">
         <p
           style="
@@ -110,25 +112,31 @@
       </div>
     </div>
 
-    <!-- Numbers Quiz -->
-    <div id="numbersQuizSection" class="d-block" >
+    <!-- **************************         Numbers Quiz        ******************************************************* -->
+    <div id="numbersQuizSection" class="d-none">
       <p
-        style="
-          font-size: xx-large;
-          margin-left: 20px;
-          cursor: pointer;
-        "
+        style="font-size: xx-large; margin-left: 20px; cursor: pointer"
         class="position-absolute"
         onclick="back()"
       >
         &#8592;
       </p>
-      <div style="height: 70vh; margin-top: 20px;" class="d-flex flex-column justify-content-evenly align-items-center mt-4">
+      <div
+        style="height: 70vh; margin-top: 20px"
+        class="
+          d-flex
+          flex-column
+          justify-content-evenly
+          align-items-center
+          mt-4
+        "
+      >
         <h1>Select one number</h1>
         <img
-        onclick="selectRandomNum()"
+          onclick="selectRandomNum()"
           src="play.png"
           alt="something"
+          id="selectRandomNumBtn"
           style="object-fit: contain; width: 100px; height: 100px"
         />
         <div class="w-75 d-flex justify-content-between">

@@ -1,12 +1,15 @@
+// sections
+const menu = document.getElementsByClassName("header");
+const menuSection = document.getElementById("menu");
+const numbersQuizSection = document.getElementById("numbersQuizSection");
+// Numbers lesson / page
 const leftButton = document.getElementById("left");
 const rightButton = document.getElementById("right");
 const number = document.getElementById("number");
 const numbersLesson = document.getElementById("numbersLesson");
-const menuSection = document.getElementById("menu");
-const numbersQuizSection = document.getElementById("numbersQuizSection");
-const menu = document.getElementsByClassName("header");
-// For quiz
+// Numbers quiz /page
 const numbersOptions = document.getElementsByClassName("numbersOption");
+const selectRandomNumBtn = document.getElementById("selectRandomNumBtn");
 
 // Text to speech
 const speech = new SpeechSynthesisUtterance();
@@ -27,23 +30,13 @@ const updatedMenuFontSize = () => {
     }
   }
 };
-
 // Once it loads
 window.onload = function () {
   return updatedMenuFontSize();
 };
-
 window.addEventListener("resize", updatedMenuFontSize);
 
-// Numbers quiz
-const selectOption = (option) => {
-  for (let index = 0; index < numbersOptions.length; index++) {
-    randomNumber == numbersOptions[index].innerHTML
-      ? numbersOptions[index].classList.add("bg-info")
-      : numbersOptions[index].classList.add("bg-danger");
-  }
-};
-
+// *********************************************            Numbers Lesson Code      ******************************************************************
 leftButton.addEventListener("click", () => {
   disableButton();
   const value = Number(number.innerText) > 0 ? Number(number.innerText) - 1 : 0;
@@ -83,34 +76,10 @@ const selectMenu = (num) => {
   }
 };
 
-const generateRandomNumberOptions = () => {
-  const correctEleIndex = Math.floor(Math.random() * (3 - 0 + 1) + 0);
-  const randomOptionsVal = [null, null, null, null];
-  randomOptionsVal[correctEleIndex] = randomNumber;
-  console.log(randomOptionsVal, "bbbbbbbbbbb");
-  let i = 0;
-  while (i < 4) {
-    console.log('all run')
-    if (!randomOptionsVal[i]) {
-      const randNum = Math.floor(Math.random() * 20) + 1;
-      if (!randomOptionsVal.includes(randNum)) {
-        randomOptionsVal[i] = randNum;
-        console.log('run')
-        i++;
-      }
-    }
-    i++;
-  }
-  console.log(randomOptionsVal, "aaaaaaaaaaaaaaaaaaaaa");
-  return randomOptionsVal.map((e) => {
-    if (e) {
-      numbersOptions[i].innerHTML = e;
-      i += 1;
-    }
-  });
-};
+// *********************************************             Numbers Quiz Code      ******************************************************************
 
 const selectRandomNum = () => {
+  selectRandomNumBtn.style.pointerEvents = "none";
   for (let index = 0; index < numbersOptions.length; index++) {
     numbersOptions[index].classList.remove("bg-danger");
     numbersOptions[index].classList.remove("bg-info");
@@ -118,7 +87,39 @@ const selectRandomNum = () => {
   randomNumber = Math.floor(Math.random() * 10) + 1;
   speech.text = randomNumber;
   window.speechSynthesis.speak(speech);
-  return generateRandomNumberOptions();
+  generateRandomNumberOptions();
+  return setTimeout(() => {
+    selectRandomNumBtn.style.pointerEvents = "auto";
+  }, 1000);
+};
+const selectOption = (option) => {
+  for (let index = 0; index < numbersOptions.length; index++) {
+    randomNumber == numbersOptions[index].innerHTML
+      ? numbersOptions[index].classList.add("bg-info")
+      : numbersOptions[index].classList.add("bg-danger");
+  }
+};
+const generateRandomNumberOptions = () => {
+  const correctEleIndex = Math.floor(Math.random() * (3 - 0 + 1) + 0);
+  const randomOptionsVal = [];
+  const temparray = [];
+  for (let index = 0; temparray.length < 3; index++) {
+    let num = Math.floor(Math.random() * 20) + 1;
+    if (num !== randomNumber && !temparray.includes(num)) {
+      temparray.push(num);
+    }
+  }
+  randomOptionsVal[correctEleIndex] = randomNumber;
+  let i = 0;
+  for (let index = 0; i < 3; index++) {
+    if (!randomOptionsVal[index]) {
+      randomOptionsVal[index] = temparray[i];
+      i++;
+    }
+  }
+  return randomOptionsVal.map((e, i) => {
+    numbersOptions[i].innerHTML = e;
+  });
 };
 
 const back = () => {
